@@ -18,7 +18,7 @@ app.use(router)
 
 
 app.listen(process.env.PORT,()=>{
-    console.log('running on the port '+process.env.PORT);
+    console.log('running on the port  '+process.env.PORT);
 
 
 })
