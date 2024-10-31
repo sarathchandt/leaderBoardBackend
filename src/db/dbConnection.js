@@ -4,7 +4,7 @@ export default {
   connect: async () => {
     try {
       mongoose.set("strictQuery", false);
-      await mongoose.connect("mongodb://localhost:27017/leaderBoard");
+      await mongoose.connect(process.env.DB);
       console.log("connected to database");
     } catch (error) {
       console.log("error connecting to database", error);
