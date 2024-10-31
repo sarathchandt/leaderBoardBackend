@@ -13,4 +13,6 @@ router.route('/leaderBoard').get(verifyToken,leaderBoardFunction)
 router.route('/updateUserScore').post(verifyToken,updateRank)
 
 
+
+
 export default router

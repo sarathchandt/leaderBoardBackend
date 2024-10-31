@@ -115,7 +115,7 @@ export const fetchUserDetails = async(email)=> {
 
 export const fetchLeaderBoard = async(id) => {
   try {
-    const players = await userModel.find().sort({score:-1,name:1}).limit(10)
+    const players = await userModel.find({},{ password: 0 }).sort({score:-1,name:1}).limit(10)
 
     const player = await userModel.findOne({_id:id})
     const higherScoreCount = await userModel.countDocuments({ score: { $gt: player.score } });

@@ -89,10 +89,14 @@ export const login = async (req, res) => {
 
 export const isTokenValid = async (req, res) => {
   try {
-    console.log(req.user, "jerere");
+    if (req.user.id == "admin") {
+      res.json({ isValid: true, isAdmin: true }).status(200);
+
+      return;
+    }
     const userDetails = await fetchUserDetails(req.user.email);
-    const { email, score } = userDetails;
-    res.json({ isValid: true, email, score }).status(200);
+    const { email, score, name } = userDetails;
+    res.json({ isValid: true, email, score, name, isAdmin: false }).status(200);
   } catch (error) {
     res.json({ isValid: true, dataBaseError: true }).status(500);
   }
@@ -112,11 +116,11 @@ export const leaderBoardFunction = async (req, res) => {
 export const updateRank = async (req, res) => {
   try {
     const { score } = req.body;
-    const {id} = req.user
+    const { id } = req.user;
     if (score > -1) {
       await updateScrore(id, score);
-      res.status(200).json({isUpdated:true})
-      return
+      res.status(200).json({ isUpdated: true });
+      return;
     }
     res.status(404).json({ isUpdated: false });
   } catch (error) {
